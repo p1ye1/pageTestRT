@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="js/headbar-footer.min.js"></script> <!-- Carga asíncrona de HTML y scripts -->
+
+<!-- Navbar desde header html -->
+<div id="navbar"></div>
+<!-- end of Navbar -->
+
+<!-- Header -->
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Solicitar Servicio</h1>
+
+            </div> <!-- end of col -->
+            <h5>Nuestra cobertura se amplía constantemente, actualmente tenemos presencia en varios municipios del
+                Estado de Michoacán y Guanajuato
+            </h5>
+
+        </div> <!-- end of row --> <b class="text-center">
+            La prestación del servicio dentro de la Cobertura del Servicio está
+            sujeta a la factibilidad técnica.
+        </b>
+    </div> <!-- end of container -->
+
+    <style>
+        /* Estilos básicos para la tarjeta */
+        #card {
+            width: 410px;
+            height: 250px;
+            background-image: url('images/frente.png');
+            background-size: cover;
+            position: relative;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+        }
+
+        #card.reverso {
+            background-image: url('images/atras.png');
+        }
+    </style>
+
+</header> <!-- end of ex-header -->
+<!-- end of header -->
+
+<div style="background: #262431">
+    <div class="container  mt-50  ">
+        <div class="row pb-4">
+
+            <!-- form -->
+            <div class="col-sm-4">
+
+
+                <form action="/upload" method="post" enctype="multipart/form-data">
+
+                    <label for="nombre">Escriba su nombre aquí:</label><br>
+                    <input type="text" id="nombre" name="nombre"><br><br>
+
+                    <label for="archivo">Suba su credencial por la parte frontal:</label><br>
+                    <input type="file" id="archivo" name="archivo"><br><br>
+
+                    <label for="archivo">Suba su credencial por la parte trasera:</label><br>
+                    <input type="file" id="archivo" name="archivo"><br><br>
+
+                    <label for="archivo">Subir comprobante de domicilio (Recibo de luz, agua, etc...):</label><br>
+                    <input type="file" id="archivo" name="archivo"><br><br>
+
+                    <button type="submit" onclick="subirArchivos()">Subir Archivos</button>
+                </form>
+
+
+            </div>
+            <!-- end of form -->
+
+            <div class="col-sm-8 mt-3">
+                <!-- Este ID es toda la INE traida del css -->
+                <div id="card"></div>
+
+                <!-- Incluyendo la librería GSAP -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+                <script>
+                    let flipped = false;
+
+                    function flipCard() {
+                        const card = document.getElementById('card');
+                        gsap.to(card, {
+                            rotationY: 180, duration: 2, onComplete: () => {
+                                flipped = !flipped;
+                                card.style.backgroundImage = flipped ? "url('images/atras.png')" : "url('images/frente.png')";
+                                gsap.set(card, { rotationY: 0 });
+                            }
+                        });
+                    }
+
+                    // Agregar evento de cambio al campo de archivo
+                    const archivoInput = document.getElementById('archivo');
+                    archivoInput.addEventListener('change', function () {
+                        const archivo = archivoInput.files[0]; // Obtener el archivo seleccionado
+                        if (archivo) {
+                            // Verificar el tipo de archivo
+                            if (archivo.type.startsWith('image/')) {
+                                // Si es una imagen, ejecutar la función flipCard
+                                flipCard();
+                            } else {
+                                alert('Por favor, seleccione un archivo de imagen.');
+                                archivoInput.value = ''; // Resetear el campo de archivo
+                            }
+                        }
+                    });
+                </script>
+                <!-- end of INE -->
+
+
+
+            </div>
+
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-col">
+                            <h4>Información del contacto
+                            </h4>
+
+                            <li class="media"><i class="far fa fa-phone mx-2 my-2" style="color: #00c9db;"></i> +52 447
+                                150
+                                1281
+                                | +52
+                                786 100 8025</li>
+                            <li class="media"><i class="far fa fa-envelope mx-2 my-2"
+                                    style="color: #00c9db;"></i>info@runtimewifi.mx</li>
+                            <li class="media"><i class="far fa fa-clock mx-2 my-2" style="color: #00c9db;"></i> Lunes a
+                                Viernes de 9:00 a 18:00 <br> Sabado Y domingo de 9:00 a 15:00
+
+
+                            </li>
+
+                        </div>
+                    </div> <!-- end of col -->
+                    <div class="col-md-4">
+                        <div class="footer-col middle">
+                            <h4>Links</h4>
+                            <ul class="list-unstyled li-space-lg">
+                                <a class="media" href='modelos'>
+                                    <i class="fas fa-square"></i>
+                                    <div class="media-body">Routers </div>
+                                </a>
+                                <li class="media">
+                                    <a href="https://tarifas.ift.org.mx/ift_visor/">
+
+                                        <div class="media-body"> <i class="fas fa-square"></i>Visor de tarifas </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div> <!-- end of col -->
+                    <div class="col-md-3">
+                        <div class="footer-col last">
+                            <h4>Redes sociales</h4>
+                            <span class="fa-stack">
+                                <a href="https://facebook.com/runtimewifi">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-facebook-f fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <a href="https://t.me/RuntimeWiFi_Bot">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-telegram fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <a href="https://youtube.com/channel/UCfIsuT3CwvqCwrmqyOgpy4A">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-youtube fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <a href="https://www.instagram.com/runtime.wifi/">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-instagram fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <a href="https://web.whatsapp.com/send?phone=+52%204471501281">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-whatsapp fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <span class="fa-stack">
+                                <a href="info@runtimewifi.mx">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="far fa fa-envelope fa-stack-1x"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of footer -->
+        <!-- end of footer -->
+
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="p-small">Todos los derechos reservados | Runtime Wifi Telecomunicaciones SAS de CV ©
+                            2024
+                        </p>
+                    </div> <!-- end of col -->
+                </div> <!-- enf of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of copyright -->
+        <!-- end of copyright -->
+
+
+        <!-- Scripts -->
+        <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+        <script src="js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+        <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+        <script src="js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+        <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+        <script src="js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+        <script src="js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+        <script src="js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+        <script src="js/scripts.js"></script> <!-- Custom scripts -->
+        </body>
+
+</html>
